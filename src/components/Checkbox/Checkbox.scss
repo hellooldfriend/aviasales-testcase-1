@@ -1,0 +1,60 @@
+@import '../../variables.scss';
+
+.checkbox {
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: $p1 $p2 $p1 50px;
+    position: relative;
+
+    &:hover {
+        background: $background_hover;
+        cursor: pointer;
+    }
+
+    input {
+        position: absolute;
+        left: 0;
+        opacity: 0;
+    }
+
+
+
+
+    &:before {
+        content: '';
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 1px solid $border_color_basic;
+        border-radius: 4px;
+        position: absolute;
+        left: 20px;
+        top: 0;
+        bottom: 0;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    &-check {
+        display: inline-block;
+        position: absolute;
+        left: 25px;
+        opacity: 0;
+    }
+
+
+    &._disabled {
+        cursor: default;
+
+        &:before {
+            border-color: $border_color_disabled;
+        }
+    }
+
+    &._checked {
+        .checkbox-check {
+            opacity: 1;
+        }
+    }
+}

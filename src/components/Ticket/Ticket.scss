@@ -1,0 +1,24 @@
+@import '../../variables.scss';
+
+.ticket {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 20px;
+
+    &-price {
+        font-size: 24px;
+        color: $color_basic;
+    }
+
+    &-info {
+        width: 100%;
+        display: inline-flex;
+        justify-content: space-between;
+    }
+
+    &-segments {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-column-gap: 10px;
+    }
+}

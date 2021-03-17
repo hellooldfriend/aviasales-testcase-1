@@ -1,0 +1,12 @@
+@import '../../variables.scss';
+
+.filter_sidebar {
+    display: inline-block;
+    background: $background_secondary;
+    border-radius: $border_radius_basic;
+
+    &-title {
+        box-sizing: border-box;
+        padding: $p1;
+    }
+}

@@ -1,0 +1,21 @@
+@import './variables.scss';
+
+body {
+    margin: 0;
+    padding: 0;
+    background: $background_main;
+}
+
+.app {
+    width: 100%;
+    max-width: 735px;
+    height: 100vh;
+    margin: 0 auto;
+
+    box-sizing: border-box;
+    padding-top: 100px;
+
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    grid-column-gap: 10px;
+}
