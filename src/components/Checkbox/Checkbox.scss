@@ -4,8 +4,9 @@
     display: inline-block;
     width: 100%;
     box-sizing: border-box;
-    padding: $p1 $p2 $p1 50px;
+    padding: 11px $p2 11px 50px;
     position: relative;
+    font-size: 13px;
 
     &:hover {
         background: $background_hover;
@@ -18,16 +19,13 @@
         opacity: 0;
     }
 
-
-
-
     &:before {
         content: '';
         display: inline-block;
-        width: 20px;
-        height: 20px;
+        width: 18px;
+        height: 18px;
         border: 1px solid $border_color_basic;
-        border-radius: 4px;
+        border-radius: 2px;
         position: absolute;
         left: 20px;
         top: 0;

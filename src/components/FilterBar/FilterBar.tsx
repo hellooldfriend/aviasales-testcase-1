@@ -7,15 +7,15 @@ import Button from '../Button'
 const OPTIONS = [
     {
         code: 'cheap',
-        title: 'Cheap',
+        title: 'Самый дешёвый',
     },
     {
         code: 'fast',
-        title: 'Fast',
+        title: 'Самый быстрый',
     },
     {
         code: 'optimum',
-        title: 'Optimum',
+        title: 'Оптимальный',
     },
 
 ]
@@ -28,7 +28,6 @@ const FilterBar = () => {
         <div className="filter_bar">
             {OPTIONS.map(option => {
                 const isActive = currentOption ? currentOption === option.code : false
-
                 return (
                     <Button
                         key={option.code}

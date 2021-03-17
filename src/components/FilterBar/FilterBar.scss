@@ -1,0 +1,23 @@
+.filter_bar {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 20px;
+    white-space: nowrap;
+
+    button {
+        text-transform: uppercase;
+        font-size: 12px;
+        line-height: 20px;
+        letter-spacing: 0.55px;
+        border-radius: 0;
+        padding: 15px 25px;
+
+        &:first-child {
+            border-radius: 6px 0 0 6px;
+        }
+
+        &:last-child {
+            border-radius: 0 6px 6px 0;
+        }
+    }
+}

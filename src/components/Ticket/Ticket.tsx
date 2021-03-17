@@ -3,12 +3,16 @@ import './Ticket.scss'
 
 
 import { ITicket, ITicketSegment } from '../../types'
-import { formatDuration, getEndDatetime, formatTime } from '../../functions'
+import {
+    formatDuration,
+    getEndDatetime,
+    formatTime,
+    formatPrice,
+    decline
+} from '../../functions'
 
 
 const Ticket = (ticket: ITicket) => {
-    console.log('props', ticket)
-
     /*
     * Custom renders
     *
@@ -18,42 +22,53 @@ const Ticket = (ticket: ITicket) => {
         return (
             <>
                 <div className="ticket-price">
-                    {ticket.price}
+                    {formatPrice(ticket.price)}
                 </div>
 
-                <div>
-                    {ticket.carrier}
-                </div>
+                <img
+                    src={`http://pics.avs.io/99/36/${ticket.carrier}.png`}
+                    alt={ticket.carrier}
+                    style={{ width: '100px', height: '36px' }}
+                />
+
             </>
         )
     }
 
     function renderSegment(segment: ITicketSegment) {
         return (
-            <div key={`${segment.origin}_${segment.duration}_${segment.date}`}
-                className="ticket-segments"
+            <div
+                key={`${segment.origin}_${segment.duration}_${segment.date}`}
+                className="ticket-segment"
             >
                 <div>
-                    {segment.origin} – {segment.destination}
-
-                    <br/>
-
-                    {formatTime(segment.date)} – {formatTime(getEndDatetime(segment.date, segment.duration))}
+                    <div className="ticket-segment-title">
+                        {segment.origin} – {segment.destination}
+                    </div>
+                    <div className="ticket-segment-body">
+                        {formatTime(segment.date)} – {formatTime(getEndDatetime(segment.date, segment.duration))}
+                    </div>
                 </div>
 
                 <div>
-                    Duration <br/>
-                    {formatDuration(segment.duration)}
+                    <div className="ticket-segment-title">
+                        В пути
+                    </div>
+                    <div className="ticket-segment-body">
+                        {formatDuration(segment.duration)}
+                    </div>
                 </div>
 
-                    {segment.stops.length > 0 &&
-                        <div>
-                            {segment.stops.length} stops
-                            <br />
+                {segment.stops.length > 0 &&
+                    <div>
+                        <div className="ticket-segment-title">
+                            {segment.stops.length} {decline(segment.stops.length, ['пересадка', 'пересадки', 'пересадок'])}
+                        </div>
+                        <div className="ticket-segment-body">
                             {segment.stops.join(', ')}
                         </div>
-
-                    }
+                    </div>
+                }
 
             </div>
         )

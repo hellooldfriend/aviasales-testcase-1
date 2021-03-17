@@ -7,6 +7,8 @@ import Ticket from './components/Ticket'
 
 
 import { ITicket } from './types'
+import Button from './components/Button'
+
 
 const SEARCH_ID_URL = 'https://front-test.beta.aviasales.ru/search'
 const TICKETS_URL = 'https://front-test.beta.aviasales.ru/tickets'
@@ -16,7 +18,7 @@ function App() {
     const [searchId, setSearchId] = useState<string | null>(null)
     const [tickets, setTickets] = useState<ITicket[]>([])
     const [stop, setStop] = useState(false)
-    const [visibleCount, setVisibleCount] = useState(1)
+    const [visibleCount, setVisibleCount] = useState(5)
 
     useEffect(() => {
         const getTickets = async (id: string) => {
@@ -72,16 +74,26 @@ function App() {
     return (
         <div className="app">
 
-            <div>
+            <div className="app-left">
                 <FilterSidebar />
             </div>
 
-            <div style={{ maxWidth: '500px' }}>
+            <div className="app-right">
                 <FilterBar />
 
                 {tickets.length > 0 ? renderTickets() : renderNullTickets()}
 
-                {tickets.length > 0 && !stop && <button onClick={() => setVisibleCount(visibleCount + 1)}>More</button> }
+
+                <div className="app-footer">
+                    {tickets.length > 0 && !stop &&
+                    <Button
+                        onClick={() => setVisibleCount(visibleCount + 5)}
+                        active
+                        value={'Показать ещё 5 билетов!'}
+                    />
+                    }
+                </div>
+
             </div>
 
         </div>

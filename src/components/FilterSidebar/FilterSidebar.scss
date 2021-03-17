@@ -1,12 +1,19 @@
 @import '../../variables.scss';
 
 .filter_sidebar {
+    width: 232px;
     display: inline-block;
     background: $background_secondary;
     border-radius: $border_radius_basic;
+    box-sizing: border-box;
+    padding: 18px 0 11px;
 
     &-title {
         box-sizing: border-box;
-        padding: $p1;
+        padding-left: $p2;
+        padding-right: $p2;
+        letter-spacing: 0.65px;
+        text-transform: uppercase;
+        margin-bottom: 6px;
     }
 }
