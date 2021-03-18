@@ -29,3 +29,15 @@ export interface ITicketSegment {
     stops: string[]
     duration: number
 }
+
+export interface IFilterBar {
+    mode: string | null
+    onChange: (mode: string | null) => void
+}
+
+export interface IFilterSidebar {
+    stops: number[]
+    activeStops: number[]
+    onChange: (value: number) => void
+    onAllStopsClick: (values: number[]) => void
+}

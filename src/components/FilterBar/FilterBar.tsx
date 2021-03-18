@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './FilterBar.scss'
+
+import { IFilterBar } from '../../types'
 
 import Button from '../Button'
 
@@ -20,20 +22,25 @@ const OPTIONS = [
 
 ]
 
-const FilterBar = () => {
-    const [currentOption, setCurrentOption] = useState<null | string>(null)
+const FilterBar = (props: IFilterBar) => {
 
 
     return (
         <div className="filter_bar">
             {OPTIONS.map(option => {
-                const isActive = currentOption ? currentOption === option.code : false
+                const isActive = props.mode ? props.mode === option.code : false
                 return (
                     <Button
                         key={option.code}
                         active={isActive}
                         value={option.title}
-                        onClick={() => setCurrentOption(option.code)}
+                        onClick={() => {
+                            if(isActive) {
+                                props.onChange(null)
+                            } else {
+                                props.onChange(option.code)
+                            }
+                        }}
                     />
                 )
             })}

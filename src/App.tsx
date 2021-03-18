@@ -20,6 +20,9 @@ function App() {
     const [stop, setStop] = useState(false)
     const [visibleCount, setVisibleCount] = useState(5)
 
+    const [filterMode, setFilterMode] = useState<string | null>(null)
+    const [filterStops, setFilterStops] = useState<number[]>([0, 1, 2, 3])
+
     useEffect(() => {
         const getTickets = async (id: string) => {
             if(!id) return
@@ -59,8 +62,10 @@ function App() {
 
     function renderTickets() {
         const visibleTickets = tickets.slice(0, visibleCount)
+        const filtered = sortTickets(visibleTickets, filterMode).filter(t => t.segments.some(s => filterStops.includes(s.stops.length)))
 
-        return visibleTickets.map((ticket, i) => {
+        // @ts-ignore
+        return filtered.map((ticket, i) => {
             return (
                 <Ticket key={`${i}_${ticket.price}_${ticket.carrier}`} {...ticket} />
             )
@@ -71,15 +76,34 @@ function App() {
         return <div>There is no tickets yet</div>
     }
 
+    const stops = tickets.map(ticket => ticket.segments.map(segment => segment.stops.length)).flat()
+    const availableStops = Array.from(new Set(stops))
+
     return (
         <div className="app">
-
             <div className="app-left">
-                <FilterSidebar />
+                <FilterSidebar
+                    stops={availableStops}
+                    activeStops={filterStops}
+                    onChange={optionCode => {
+                        let filterStopsState = [...filterStops]
+
+                        if(filterStopsState.includes(optionCode)) {
+                            filterStopsState = filterStopsState.filter(n => n !== optionCode)
+                        } else {
+                            filterStopsState.push(optionCode)
+                        }
+                        setFilterStops(filterStopsState)
+                    }}
+                    onAllStopsClick={values => setFilterStops(values)}
+                />
             </div>
 
             <div className="app-right">
-                <FilterBar />
+                <FilterBar
+                    mode={filterMode}
+                    onChange={setFilterMode}
+                />
 
                 {tickets.length > 0 ? renderTickets() : renderNullTickets()}
 
@@ -99,5 +123,21 @@ function App() {
         </div>
     )
 }
+
+function sortTickets(tickets: ITicket[], mode: (string | null) = null, stops?: number[]) {
+    if(mode === 'cheap') {
+        return tickets.sort((a, b) =>  a.price - b.price)
+    } else if(mode === 'fast') {
+        return tickets.sort((a, b) => findMin(a) - findMin(b))
+    } else if(mode === 'optimum') {
+        return tickets
+    }
+    return tickets
+}
+
+function findMin(ticket: ITicket): number {
+    return Math.min(...ticket.segments.map(s => s.duration))
+}
+
 
 export default App

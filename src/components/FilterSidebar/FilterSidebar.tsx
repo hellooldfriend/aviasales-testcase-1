@@ -2,51 +2,66 @@ import React, { useState } from 'react'
 import './FilterSidebar.scss'
 
 import Checkbox from '../Checkbox'
+import { IFilterSidebar } from '../../types'
 
 
 const OPTIONS = [
+    // {
+    //   code: 'all',
+    //   title: 'Все',
+    // },
     {
-        code: 'all',
-        title: 'Все',
-    },
-    {
-        code: 'no_changes',
+        code: 0,
         title: 'Без пересадок',
     },
     {
-        code: 'one',
+        code: 1,
         title: '1 пересадка',
     },
     {
-        code: 'two',
+        code: 2,
         title: '2 пересадки',
     },
     {
-        code: 'three',
+        code: 3,
         title: '3 пересадки',
     }
 ]
 
-const FilterSidebar = () => {
+const FilterSidebar = (props: IFilterSidebar) => {
+
+
+    const allActive = props.activeStops.length === OPTIONS.length
 
     return (
         <div className="filter_sidebar">
             <div className="filter_sidebar-title">Количество пересадок</div>
 
             <div className="filter_sidebar-items">
+                <Checkbox
+                    value={allActive}
+                    title={'Все'}
+                    onChange={() => {
+                        if(allActive) {
+                            props.onAllStopsClick([])
+                        } else {
+                            const values = OPTIONS.map(option => option.code)
+                            props.onAllStopsClick(values)
+                        }
+                    }}
+                />
+
                 {OPTIONS.map(option => {
                     return (
                         <Checkbox
                             key={option.code}
-                            value={false}
+                            value={props.activeStops.includes(option.code)}
+                            disabled={!props.stops.includes(option.code)}
                             title={option.title}
-                            onChange={value => console.log(value)}
+                            onChange={() => props.onChange(option.code)}
                         />
                     )
                 })}
-
-
-
             </div>
 
         </div>
