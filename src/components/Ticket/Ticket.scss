@@ -9,7 +9,7 @@
     padding: $p2;
 
     &-price {
-        font-size: 24px;
+        font-size: $font_size_big;
         color: $color_secondary;
     }
 
@@ -30,12 +30,11 @@
             color: $color_subtitle;
             text-transform: uppercase;
             line-height: 18px;
-            letter-spacing: 0.5px;
+            letter-spacing: $letter_spacing_basic;
         }
 
         &-body {
-            font-size: 14px;
+            font-size: $font_size_secondary;
         }
     }
-
 }

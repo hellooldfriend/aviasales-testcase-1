@@ -11,6 +11,11 @@
     &:hover {
         background: $background_hover;
         cursor: pointer;
+        box-shadow: $box_shadow_basic;
+
+        &:before {
+            box-shadow: $box_shadow_basic;
+        }
     }
 
     input {
@@ -40,7 +45,6 @@
         left: 25px;
         opacity: 0;
     }
-
 
     &._disabled {
         cursor: default;

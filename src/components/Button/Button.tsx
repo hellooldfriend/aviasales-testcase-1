@@ -5,7 +5,6 @@ import { IButton } from '../../types'
 
 
 const Button = (props: IButton) => {
-
     const cls = ['button']
     if(props.active) {
         cls.push('_active')
@@ -19,5 +18,6 @@ const Button = (props: IButton) => {
         >{props.value}</button>
     )
 }
+
 
 export default Button

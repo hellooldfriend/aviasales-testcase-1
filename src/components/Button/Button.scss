@@ -1,17 +1,17 @@
 @import '../../variables.scss';
 
 .button {
-    background: #fff;
+    background: $background_secondary;
     border: none;
     outline: none;
     box-sizing: border-box;
     padding: 15px;
-    border-radius: 4px;
+    border-radius: $border_radius_secondary;
     text-align: center;
     cursor: pointer;
 
     &._active {
         background: $background_active;
-        color: #fff;
+        color: $color_button_secondary;
     }
 }

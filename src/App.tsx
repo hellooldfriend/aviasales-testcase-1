@@ -21,7 +21,7 @@ function App() {
     const [visibleCount, setVisibleCount] = useState(5)
 
     const [filterMode, setFilterMode] = useState<string | null>(null)
-    const [filterStops, setFilterStops] = useState<number[]>([0, 1, 2, 3])
+    const [filterStops, setFilterStops] = useState<number[]>([])
 
     useEffect(() => {
         const getTickets = async (id: string) => {
@@ -62,7 +62,10 @@ function App() {
 
     function renderTickets() {
         const visibleTickets = tickets.slice(0, visibleCount)
-        const filtered = sortTickets(visibleTickets, filterMode).filter(t => t.segments.some(s => filterStops.includes(s.stops.length)))
+        const filtered = sortTickets(visibleTickets, filterMode) //.filter(t => t.segments.some(s => filterStops.includes(s.stops.length)))
+
+        // setFilterStops(getFilteredStops(filtered))
+
 
         // @ts-ignore
         return filtered.map((ticket, i) => {
@@ -137,6 +140,14 @@ function sortTickets(tickets: ITicket[], mode: (string | null) = null, stops?: n
 
 function findMin(ticket: ITicket): number {
     return Math.min(...ticket.segments.map(s => s.duration))
+}
+
+function getFilteredStops(tickets: ITicket[]): number[] {
+    const stops = tickets.map(t => t.segments.map(s => s.stops.length)).flat()
+    const unique = Array.from(new Set(stops))
+    console.log('unique', unique, tickets)
+    return unique
+
 }
 
 

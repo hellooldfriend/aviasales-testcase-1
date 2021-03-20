@@ -6,14 +6,13 @@ body {
     background: $background_main;
     font-size: $font_size_basic;
     color: $color_basic;
-    font-family: 'Open Sans', sans-serif;
+    font-family: $font_family_basic;
     font-weight: 600;
 }
 
 .app {
     width: 100%;
-    max-width: 735px;
-    //height: 100vh;
+    max-width: $max_page_width;
     margin: 0 auto;
 
     box-sizing: border-box;
@@ -29,20 +28,12 @@ body {
         top: 0;
     }
 
-    &-left {
-
-    }
-
-    &-right {
-
-    }
-
     &-footer {
         button {
             width: 100%;
-            letter-spacing: 0.5px;
+            letter-spacing: $letter_spacing_basic;
             text-transform: uppercase;
-            font-size: 12px;
+            font-size: $font_size_basic;
             padding: 18px;
         }
     }

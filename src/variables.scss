@@ -10,6 +10,7 @@ $background_active: #2196F3;
 $color_basic: #4A4A4A;
 $color_secondary: #2196F3;
 $color_subtitle: #A0B0B9;
+$color_button_secondary: #fff;
 
 
 // fonts
@@ -17,6 +18,9 @@ $font_size_basic: 12px;
 $font_size_secondary: 14px;
 $font_size_big: 24px;
 
+$font_family_basic: 'Open sans', sans-serif;
+$letter_spacing_basic: .5px;
+$letter_spacing_secondary: .55px;
 
 // paddings and margins
 $p0: 0px;
@@ -26,6 +30,12 @@ $p2: 20px;
 
 // borders
 $border_radius_basic: 5px;
+$border_radius_secondary: 4px;
+
 $border_color_basic: #2196F3;
 $border_color_disabled: #9ABBCE;
 
+
+// other variables
+$max_page_width: 735px;
+$box_shadow_basic: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
