@@ -9,7 +9,7 @@ import {
     formatTime,
     formatPrice,
     decline
-} from '../../functions'
+} from '../../utils'
 
 
 const Ticket = (ticket: ITicket) => {

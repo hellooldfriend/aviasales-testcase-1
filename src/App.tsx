@@ -147,7 +147,6 @@ function getFilteredStops(tickets: ITicket[]): number[] {
     const unique = Array.from(new Set(stops))
     console.log('unique', unique, tickets)
     return unique
-
 }
 
 

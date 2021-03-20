@@ -16,7 +16,10 @@ const Checkbox = (props: ICheckbox) => {
     }
 
     return (
-        <label className={cls.join(' ')}>
+        <label
+            className={cls.join(' ')}
+            data-testid="checkbox"
+        >
 
             {props.value &&
                 <span className="checkbox-check">

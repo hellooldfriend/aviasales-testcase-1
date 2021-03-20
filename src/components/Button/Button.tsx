@@ -15,6 +15,7 @@ const Button = (props: IButton) => {
             className={cls.join(' ')}
             disabled={props.disabled}
             onClick={props.onClick}
+            data-testid="button"
         >{props.value}</button>
     )
 }

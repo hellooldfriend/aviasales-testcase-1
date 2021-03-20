@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './FilterSidebar.scss'
 
 import Checkbox from '../Checkbox'
@@ -6,10 +6,6 @@ import { IFilterSidebar } from '../../types'
 
 
 const OPTIONS = [
-    // {
-    //   code: 'all',
-    //   title: 'Все',
-    // },
     {
         code: 0,
         title: 'Без пересадок',

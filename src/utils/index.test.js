@@ -5,7 +5,7 @@ import {
     addZero,
     formatPrice,
     decline,
-} from './functions'
+} from './index'
 
 it('Should format minutes to HH:mm', () => {
     expect(formatDuration(635)).toEqual('10ч 35м')
