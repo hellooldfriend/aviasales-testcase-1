@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Ticket Matches snapshot 1`] = `
+<div
+  className="ticket"
+  data-testid="ticket"
+>
+  <div
+    className="ticket-info"
+  >
+    <div
+      className="ticket-price"
+    >
+      2 000
+    </div>
+    <img
+      alt="XXX"
+      src="http://pics.avs.io/99/36/XXX.png"
+      style={
+        Object {
+          "height": "36px",
+          "width": "100px",
+        }
+      }
+    />
+  </div>
+</div>
+`;

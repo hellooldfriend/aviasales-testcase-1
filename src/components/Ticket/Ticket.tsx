@@ -80,7 +80,9 @@ const Ticket = (ticket: ITicket) => {
    *
    */
     return (
-        <div className="ticket">
+        <div className="ticket"
+            data-testid="ticket"
+        >
             <div className="ticket-info">
                 {renderInfo()}
             </div>

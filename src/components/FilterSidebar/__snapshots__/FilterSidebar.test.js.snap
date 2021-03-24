@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilterSidebar Matches snapshot 1`] = `
+<div
+  className="filter_sidebar"
+  data-testid="filter_sidebar"
+>
+  <div
+    className="filter_sidebar-title"
+  >
+    Количество пересадок
+  </div>
+  <div
+    className="filter_sidebar-items"
+  >
+    <label
+      className="checkbox"
+      data-testid="checkbox"
+    >
+      <input
+        checked={false}
+        onChange={[Function]}
+        type="checkbox"
+      />
+      Все
+    </label>
+    <label
+      className="checkbox _disabled"
+      data-testid="checkbox"
+    >
+      <input
+        checked={false}
+        disabled={true}
+        onChange={[Function]}
+        type="checkbox"
+      />
+      Без пересадок
+    </label>
+    <label
+      className="checkbox _disabled"
+      data-testid="checkbox"
+    >
+      <input
+        checked={false}
+        disabled={true}
+        onChange={[Function]}
+        type="checkbox"
+      />
+      1 пересадка
+    </label>
+    <label
+      className="checkbox _disabled"
+      data-testid="checkbox"
+    >
+      <input
+        checked={false}
+        disabled={true}
+        onChange={[Function]}
+        type="checkbox"
+      />
+      2 пересадки
+    </label>
+    <label
+      className="checkbox _disabled"
+      data-testid="checkbox"
+    >
+      <input
+        checked={false}
+        disabled={true}
+        onChange={[Function]}
+        type="checkbox"
+      />
+      3 пересадки
+    </label>
+  </div>
+</div>
+`;

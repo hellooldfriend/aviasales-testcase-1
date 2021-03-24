@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilterBar Matches snapshot 1`] = `
+<div
+  className="filter_bar"
+  data-testid="filter_bar"
+>
+  <button
+    className="button"
+    data-testid="button"
+    onClick={[Function]}
+  >
+    Самый дешёвый
+  </button>
+  <button
+    className="button"
+    data-testid="button"
+    onClick={[Function]}
+  >
+    Самый быстрый
+  </button>
+  <button
+    className="button"
+    data-testid="button"
+    onClick={[Function]}
+  >
+    Оптимальный
+  </button>
+</div>
+`;

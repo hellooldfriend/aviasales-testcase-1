@@ -15,4 +15,9 @@ describe('FilterBar', () => {
         const element = screen.getByTestId('filter_bar')
         expect(element).toBeInTheDocument()
     })
+
+    test('Matches snapshot', () => {
+        const element = renderer.create(<FilterBar />).toJSON()
+        expect(element).toMatchSnapshot()
+    })
 })

@@ -25,12 +25,15 @@ const OPTIONS = [
 ]
 
 const FilterSidebar = (props: IFilterSidebar) => {
+    const activeStops = props.activeStops || []
+    const stops = props.stops || []
 
-
-    const allActive = props.activeStops.length === OPTIONS.length
+    const allActive = activeStops.length === OPTIONS.length
 
     return (
-        <div className="filter_sidebar">
+        <div className="filter_sidebar"
+            data-testid="filter_sidebar"
+        >
             <div className="filter_sidebar-title">Количество пересадок</div>
 
             <div className="filter_sidebar-items">
@@ -51,8 +54,8 @@ const FilterSidebar = (props: IFilterSidebar) => {
                     return (
                         <Checkbox
                             key={option.code}
-                            value={props.activeStops.includes(option.code)}
-                            disabled={!props.stops.includes(option.code)}
+                            value={activeStops.includes(option.code)}
+                            disabled={!stops.includes(option.code)}
                             title={option.title}
                             onChange={() => props.onChange(option.code)}
                         />
