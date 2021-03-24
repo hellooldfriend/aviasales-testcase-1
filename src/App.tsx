@@ -5,18 +5,23 @@ import FilterSidebar from './components/FilterSidebar'
 import FilterBar from './components/FilterBar'
 import Ticket from './components/Ticket'
 
-
 import { ITicket } from './types'
 import Button from './components/Button'
 
-
-const SEARCH_ID_URL = 'https://front-test.beta.aviasales.ru/search'
-const TICKETS_URL = 'https://front-test.beta.aviasales.ru/tickets'
+import api from './api'
+import { IconLogo } from './icons'
 
 
 function App() {
-    const [searchId, setSearchId] = useState<string | null>(null)
+
+    /*
+    * State
+    *
+    *
+    */
     const [tickets, setTickets] = useState<ITicket[]>([])
+    const [filteredTickets, setFilteredTickets] = useState<ITicket[]>([])
+
     const [stop, setStop] = useState(false)
     const [visibleCount, setVisibleCount] = useState(5)
 
@@ -24,107 +29,145 @@ function App() {
     const [filterStops, setFilterStops] = useState<number[]>([])
 
     useEffect(() => {
-        const getTickets = async (id: string) => {
-            if(!id) return
-            const url = `${TICKETS_URL}?searchId=${id}`
-            const response = await fetch(url).then(response => {
-                if(response.ok) {
-                    return response.json()
-                }
-                return null
-            })
-            const result = await response
-            if(result) {
-                setTickets(result.tickets)
-                setStop(result.stop)
-            }
+        const loadData = async () => {
+            const response = await api.getTickets()
+            console.log('response', response)
+            setTickets(response.tickets)
+            setStop(response.stop)
         }
-
-        const fetchSearchId = async () => {
-            const response = await fetch(SEARCH_ID_URL).then(response => {
-                if(response.ok) {
-                    return response.json()
-                }
-                return null
-            })
-            const result = await response
-            setSearchId(result ? result.searchId : null)
-            if(result) {
-                getTickets(result.searchId)
-            }
-        }
-
-        fetchSearchId()
-
-
+        loadData()
     }, [])
 
+    useEffect(() => {
+        setFilteredTickets(filterTickets(tickets, visibleCount, filterMode, filterStops))
+    }, [tickets, visibleCount, filterMode, filterStops])
+
+    /*
+    * Handlers
+    *
+    *
+    */
+
+    function handleFilterSidebarChange(code: number) {
+        let filterStopsState = [...filterStops]
+
+        if(filterStopsState.includes(code)) {
+            filterStopsState = filterStopsState.filter(n => n !== code)
+        } else {
+            filterStopsState.push(code)
+        }
+        setFilterStops(filterStopsState)
+    }
+
+    function handleFilterBarChange(mode: string | null) {
+        setFilterMode(mode)
+    }
+
+    /*
+    * Custom renders
+    *
+    *
+    */
 
     function renderTickets() {
-        const visibleTickets = tickets.slice(0, visibleCount)
-        const filtered = sortTickets(visibleTickets, filterMode) //.filter(t => t.segments.some(s => filterStops.includes(s.stops.length)))
+        if(filteredTickets.length === 0) {
+            return <div>Loading...</div>
+        }
 
-        // setFilterStops(getFilteredStops(filtered))
-
-
+        // TODO: remove hack
         // @ts-ignore
-        return filtered.map((ticket, i) => {
+        return filteredTickets.map((ticket, i) => {
+            const key = `${i}_${ticket.price}_${ticket.carrier}`
             return (
-                <Ticket key={`${i}_${ticket.price}_${ticket.carrier}`} {...ticket} />
+                <Ticket
+                    key={key}
+                    {...ticket}
+                />
             )
         })
     }
 
-    function renderNullTickets() {
-        return <div>There is no tickets yet</div>
-    }
 
-    const stops = tickets.map(ticket => ticket.segments.map(segment => segment.stops.length)).flat()
-    const availableStops = Array.from(new Set(stops))
-
-    return (
-        <div className="app">
-            <div className="app-left">
-                <FilterSidebar
-                    stops={availableStops}
-                    activeStops={filterStops}
-                    onChange={optionCode => {
-                        let filterStopsState = [...filterStops]
-
-                        if(filterStopsState.includes(optionCode)) {
-                            filterStopsState = filterStopsState.filter(n => n !== optionCode)
-                        } else {
-                            filterStopsState.push(optionCode)
-                        }
-                        setFilterStops(filterStopsState)
-                    }}
-                    onAllStopsClick={values => setFilterStops(values)}
-                />
-            </div>
-
-            <div className="app-right">
-                <FilterBar
-                    mode={filterMode}
-                    onChange={setFilterMode}
-                />
-
-                {tickets.length > 0 ? renderTickets() : renderNullTickets()}
-
-
-                <div className="app-footer">
-                    {tickets.length > 0 && !stop &&
+    function renderFooter() {
+        return (
+            <div className="app-footer">
+                {tickets.length > 0 && !stop &&
                     <Button
                         onClick={() => setVisibleCount(visibleCount + 5)}
                         active
                         value={'Показать ещё 5 билетов!'}
                     />
-                    }
-                </div>
-
+                }
             </div>
+        )
+    }
 
+    function renderLeftColumn() {
+        const availableStops = getFilteredStops(tickets)
+
+        return (
+            <div>
+                <FilterSidebar
+                    stops={availableStops}
+                    activeStops={filterStops}
+                    onChange={handleFilterSidebarChange}
+                    onAllStopsClick={setFilterStops}
+                />
+            </div>
+        )
+    }
+
+    function renderRightColumn() {
+        return (
+            <div>
+                <FilterBar
+                    mode={filterMode}
+                    onChange={handleFilterBarChange}
+                />
+
+                {renderTickets()}
+
+                {renderFooter()}
+            </div>
+        )
+    }
+
+    /*
+    * Final render
+    *
+    *
+    */
+
+    return (
+        <div className="app">
+            <a className="app-logo" href="/">
+                <IconLogo />
+            </a>
+
+            <div className="columns">
+                {renderLeftColumn()}
+                {renderRightColumn()}
+            </div>
         </div>
     )
+}
+
+
+/*
+* Useful functions
+*
+*
+*/
+
+function filterTickets(tickets: ITicket[], count: number = 5, mode: string | null = null, stops: number[] = []) {
+    const currentTickets = tickets.slice(0, count)
+    let currentStops: number[] = []
+    if(stops.length === 0) {
+        currentStops = getFilteredStops(currentTickets)
+    } else {
+        currentStops = stops
+    }
+    return sortTickets(currentTickets, mode, stops).filter(t => t.segments.some(s => currentStops.includes(s.stops.length)))
 }
 
 function sortTickets(tickets: ITicket[], mode: (string | null) = null, stops?: number[]) {
@@ -142,11 +185,22 @@ function findMin(ticket: ITicket): number {
     return Math.min(...ticket.segments.map(s => s.duration))
 }
 
-function getFilteredStops(tickets: ITicket[]): number[] {
-    const stops = tickets.map(t => t.segments.map(s => s.stops.length)).flat()
-    const unique = Array.from(new Set(stops))
-    console.log('unique', unique, tickets)
-    return unique
+function getFilteredStops(tickets: ITicket[], maxSize = 4): number[] {
+    const unique = new Set()
+    for(let ticket of tickets) {
+        for(let segment of ticket.segments) {
+            const length = segment.stops.length
+            if(!unique.has(length)) {
+                unique.add(length)
+            }
+            continue
+        }
+        if(unique.size === maxSize) break
+    }
+    const result = Array.from(unique)
+    // TODO: remove
+    // @ts-ignore
+    return result
 }
 
 

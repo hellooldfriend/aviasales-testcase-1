@@ -6,7 +6,8 @@
     background: $background_secondary;
     border-radius: $border_radius_basic;
     box-sizing: border-box;
-    padding: 18px 0 11px;
+    padding-top: 18px;
+    padding-bottom: 10px;
 
     &-title {
         box-sizing: border-box;

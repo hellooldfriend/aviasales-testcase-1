@@ -26,7 +26,7 @@ const FilterBar = (props: IFilterBar) => {
 
 
     return (
-        <div className="filter_bar">
+        <div className="filter_bar" data-testid="filter_bar">
             {OPTIONS.map(option => {
                 const isActive = props.mode ? props.mode === option.code : false
                 return (

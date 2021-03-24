@@ -1,12 +1,13 @@
 @import '../../variables.scss';
 
 .filter_bar {
-    display: inline-block;
+    display: inline-flex;
     width: 100%;
     margin-bottom: 20px;
     white-space: nowrap;
 
     button {
+        width: 100%;
         text-transform: uppercase;
         font-size: $font_size_basic;
         line-height: 20px;

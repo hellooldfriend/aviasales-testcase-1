@@ -18,9 +18,7 @@ const props = {
 }
 
 test('Should render not active button', () => {
-    render(
-        <Button value={props.value} />
-    )
+    render(<Button value={props.value} />)
     const element = screen.getByTestId('button')
     expect(element).toBeInTheDocument()
     expect(element).toHaveTextContent(props.value)

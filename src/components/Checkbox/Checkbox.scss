@@ -8,10 +8,11 @@
     position: relative;
     font-size: 13px;
 
-    &:hover {
+    &:hover:not(._disabled) {
         background: $background_hover;
         cursor: pointer;
         box-shadow: $box_shadow_basic;
+        transition: all 0.25s ease-in-out;
 
         &:before {
             box-shadow: $box_shadow_basic;
