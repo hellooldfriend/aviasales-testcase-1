@@ -2,6 +2,7 @@
   "name": "test-task-1",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://hellooldfriend.github.io/aviasales-testcase-1",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/user-event": "^12.1.10",
@@ -20,7 +21,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -42,6 +45,7 @@
   },
   "devDependencies": {
     "@testing-library/react": "^11.2.5",
+    "gh-pages": "^3.1.0",
     "react-test-renderer": "^17.0.1"
   }
 }
