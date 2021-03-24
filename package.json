@@ -2,7 +2,7 @@
   "name": "test-task-1",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://hellooldfriend.github.io/aviasales-testcase-1",
+  "homepage": "http://hellooldfriend.github.io/aviasales-testcase-1/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/user-event": "^12.1.10",

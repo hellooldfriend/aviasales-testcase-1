@@ -20,6 +20,7 @@ const api = {
             return response.json()
         } catch {
             throw new Error('Failed to fetch tickets')
+            alert('Failed to fetch tickets. Reload page.')
         }
     }
 }
