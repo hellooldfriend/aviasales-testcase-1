@@ -13,25 +13,27 @@ afterEach(() => {
 const props = {
     stops: [],
     activeStops: [],
+    onChange: () => {},
+    onAllStopsClick: () => {},
 }
 
 describe('FilterSidebar', () => {
     test('Should render', () => {
         render(
             <FilterSidebar
-                stops={props.stops}
-                activeStops={props.activeStops}
+                {...props}
             />
         )
         const element = screen.getByTestId('filter_sidebar')
         expect(element).toBeInTheDocument()
+        // @ts-ignore
+        expect(element.querySelector('.filter_sidebar-title').textContent).toBe('Количество пересадок')
     })
 
     test('Matches snapshot', () => {
         const element = renderer.create(
             <FilterSidebar
-                stops={props.stops}
-                activeStops={props.activeStops}
+                {...props}
             />
         ).toJSON()
         expect(element).toMatchSnapshot()

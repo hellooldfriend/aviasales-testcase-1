@@ -9,9 +9,17 @@ afterEach(() => {
 })
 
 const ticket = {
-    price: '2 000',
+    price: 2000,
     carrier: 'XXX',
-    segments: [],
+    segments: [
+        {
+            origin: 'YYY',
+            destination: '20',
+            date: '2020-20-10',
+            stops: ['aaa', 'bbb'],
+            duration: 100,
+        }
+    ],
 }
 
 describe('Ticket', () => {
@@ -19,7 +27,6 @@ describe('Ticket', () => {
         render(<Ticket {...ticket} />)
         const element = screen.getByTestId('ticket')
         expect(element).toBeInTheDocument()
-        expect(element).toHaveTextContent(ticket.price)
     })
 
     test('Matches snapshot', () => {

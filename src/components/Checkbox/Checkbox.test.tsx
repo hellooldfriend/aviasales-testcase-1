@@ -12,11 +12,16 @@ afterEach(() => {
 const props = {
     value: true,
     title: 'Test',
+    onChange: () => {},
 }
 
 describe('Checkbox', () => {
     test('Should render active Checkbox', () => {
-        render(<Checkbox value={props.value} title={props.title} />)
+        render(
+            <Checkbox
+                {...props}
+            />
+        )
         const element = screen.getByTestId('checkbox')
         expect(element).toBeInTheDocument()
         expect(element).toHaveClass('_checked')
@@ -24,7 +29,12 @@ describe('Checkbox', () => {
     })
 
     test('Should render not active Checkbox', () => {
-        render(<Checkbox value={false} title={props.title} />)
+        render(
+            <Checkbox
+                {...props}
+                value={false}
+            />
+        )
         const element = screen.getByTestId('checkbox')
         expect(element).toBeInTheDocument()
         expect(element).not.toHaveClass('_checked')
@@ -32,7 +42,12 @@ describe('Checkbox', () => {
     })
 
     test('Should render disabled Checkbox', () => {
-        render(<Checkbox disabled={true} title={props.title} />)
+        render(
+            <Checkbox
+                {...props}
+                disabled={true}
+            />
+        )
         const element = screen.getByTestId('checkbox')
         expect(element).toBeInTheDocument()
         expect(element).toHaveClass('_disabled')
@@ -40,7 +55,10 @@ describe('Checkbox', () => {
     })
 
     test('Matches snapshot', () => {
-        const element = renderer.create(<Checkbox value={true} title={props.title} />).toJSON()
+        const element = renderer.create(
+            <Checkbox
+                {...props}
+            />).toJSON()
         expect(element).toMatchSnapshot()
     })
 })

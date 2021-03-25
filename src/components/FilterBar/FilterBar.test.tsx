@@ -9,15 +9,21 @@ afterEach(() => {
     cleanup()
 })
 
+const props = {
+    mode: '',
+    onChange: () => {},
+}
+
+
 describe('FilterBar', () => {
     test('Should render FilterBar', () => {
-        render(<FilterBar />)
+        render(<FilterBar {...props} />)
         const element = screen.getByTestId('filter_bar')
         expect(element).toBeInTheDocument()
     })
 
     test('Matches snapshot', () => {
-        const element = renderer.create(<FilterBar />).toJSON()
+        const element = renderer.create(<FilterBar {...props} />).toJSON()
         expect(element).toMatchSnapshot()
     })
 })
