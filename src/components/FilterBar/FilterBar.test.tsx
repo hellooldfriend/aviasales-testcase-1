@@ -10,7 +10,7 @@ afterEach(() => {
 })
 
 const props = {
-    mode: '',
+    mode: null,
     onChange: () => {},
 }
 
@@ -23,7 +23,7 @@ describe('FilterBar', () => {
     })
 
     test('Matches snapshot', () => {
-        const element = renderer.create(<FilterBar {...props} />).toJSON()
+        const element = renderer.create(<FilterBar {...props} mode={'cheap'} />).toJSON()
         expect(element).toMatchSnapshot()
     })
 })

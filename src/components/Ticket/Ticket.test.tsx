@@ -30,9 +30,7 @@ describe('Ticket', () => {
     })
 
     test('Matches snapshot', () => {
-        const element = renderer.create(
-            <Ticket {...ticket} />
-        ).toJSON()
+        const element = renderer.create(<Ticket {...ticket} />).toJSON()
         expect(element).toMatchSnapshot()
     })
 })

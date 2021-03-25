@@ -6,7 +6,7 @@ exports[`FilterBar Matches snapshot 1`] = `
   data-testid="filter_bar"
 >
   <button
-    className="button"
+    className="button _active"
     data-testid="button"
     onClick={[Function]}
   >

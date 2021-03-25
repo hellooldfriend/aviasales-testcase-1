@@ -17,17 +17,14 @@ const props = {
     onAllStopsClick: () => {},
 }
 
+
 describe('FilterSidebar', () => {
     test('Should render', () => {
-        render(
-            <FilterSidebar
-                {...props}
-            />
-        )
+        const { getByText } = render(<FilterSidebar {...props} />)
         const element = screen.getByTestId('filter_sidebar')
+
         expect(element).toBeInTheDocument()
-        // @ts-ignore
-        expect(element.querySelector('.filter_sidebar-title').textContent).toBe('Количество пересадок')
+        getByText('Количество пересадок')
     })
 
     test('Matches snapshot', () => {
