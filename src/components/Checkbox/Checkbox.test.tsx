@@ -12,29 +12,21 @@ afterEach(() => {
 const props = {
     value: true,
     title: 'Test',
-    onChange: () => {},
+    onChange: (value: boolean) => value,
 }
 
 describe('Checkbox', () => {
     test('Should render active Checkbox', () => {
-        render(
-            <Checkbox
-                {...props}
-            />
-        )
+        render(<Checkbox {...props} />)
         const element = screen.getByTestId('checkbox')
+
         expect(element).toBeInTheDocument()
         expect(element).toHaveClass('_checked')
         expect(element).toHaveTextContent(props.title)
     })
 
     test('Should render not active Checkbox', () => {
-        render(
-            <Checkbox
-                {...props}
-                value={false}
-            />
-        )
+        render(<Checkbox {...props} value={false} />)
         const element = screen.getByTestId('checkbox')
         expect(element).toBeInTheDocument()
         expect(element).not.toHaveClass('_checked')
@@ -42,12 +34,7 @@ describe('Checkbox', () => {
     })
 
     test('Should render disabled Checkbox', () => {
-        render(
-            <Checkbox
-                {...props}
-                disabled={true}
-            />
-        )
+        render(<Checkbox {...props} disabled={true} />)
         const element = screen.getByTestId('checkbox')
         expect(element).toBeInTheDocument()
         expect(element).toHaveClass('_disabled')

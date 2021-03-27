@@ -4,12 +4,15 @@ import './App.scss'
 import FilterSidebar from './components/FilterSidebar'
 import FilterBar from './components/FilterBar'
 import Ticket from './components/Ticket'
-
-import { ITicket } from './types'
 import Button from './components/Button'
 
 import api from './api'
+import { ITicket } from './types'
 import { IconLogo } from './icons'
+import {
+    getFilteredStops,
+    filterTickets
+} from './utils'
 
 
 function App() {
@@ -139,7 +142,7 @@ function App() {
     */
 
     return (
-        <div className="app">
+        <div className="app" data-testid="app">
             <a className="app-logo" href="/">
                 <IconLogo />
             </a>
@@ -151,57 +154,5 @@ function App() {
         </div>
     )
 }
-
-
-/*
-* Useful functions
-*
-*
-*/
-
-function filterTickets(tickets: ITicket[], count: number = 5, mode: string | null = null, stops: number[] = []) {
-    const currentTickets = tickets.slice(0, count)
-    let currentStops: number[] = []
-    if(stops.length === 0) {
-        currentStops = getFilteredStops(currentTickets)
-    } else {
-        currentStops = stops
-    }
-    return sortTickets(currentTickets, mode, stops).filter(t => t.segments.some(s => currentStops.includes(s.stops.length)))
-}
-
-function sortTickets(tickets: ITicket[], mode: (string | null) = null, stops?: number[]) {
-    if(mode === 'cheap') {
-        return tickets.sort((a, b) =>  a.price - b.price)
-    } else if(mode === 'fast') {
-        return tickets.sort((a, b) => findMin(a) - findMin(b))
-    } else if(mode === 'optimum') {
-        return tickets
-    }
-    return tickets
-}
-
-function findMin(ticket: ITicket): number {
-    return Math.min(...ticket.segments.map(s => s.duration))
-}
-
-function getFilteredStops(tickets: ITicket[], maxSize = 4): number[] {
-    const unique = new Set()
-    for(let ticket of tickets) {
-        for(let segment of ticket.segments) {
-            const length = segment.stops.length
-            if(!unique.has(length)) {
-                unique.add(length)
-            }
-            continue
-        }
-        if(unique.size === maxSize) break
-    }
-    const result = Array.from(unique)
-    // TODO: remove
-    // @ts-ignore
-    return result
-}
-
 
 export default App

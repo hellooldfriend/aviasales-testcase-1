@@ -5,7 +5,13 @@ import {
     addZero,
     formatPrice,
     decline,
+    getFilteredStops,
+    findMinimumSegment,
+    sortTickets
 } from './index'
+
+import { tickets, tickets2 } from '../dataForTesting'
+
 
 it('Should format minutes to HH:mm', () => {
     expect(formatDuration(635)).toEqual('10ч 35м')
@@ -42,4 +48,36 @@ it('Should return string with correct decline depend on count', () => {
     expect(decline(2, ['пересадка', 'пересадки', 'пересадок'])).toEqual('пересадки')
     expect(decline(3, ['пересадка', 'пересадки', 'пересадок'])).toEqual('пересадки')
     expect(decline(5, ['пересадка', 'пересадки', 'пересадок'])).toEqual('пересадок')
+})
+
+
+
+
+it('Should return array of numbers based on tickets stops', () => {
+    expect(getFilteredStops(tickets)).toEqual(expect.arrayContaining([1, 2]))
+    expect(getFilteredStops(tickets2)).toEqual(expect.arrayContaining([]))
+})
+
+it('Should return minimum duration number', () => {
+    expect(findMinimumSegment(tickets[0])).toEqual(1000)
+    expect(findMinimumSegment(tickets2[0])).toEqual(250)
+})
+
+describe('Sort tickets function', () => {
+    it('Should return array of tickets without sorting', () => {
+        // TODO
+    })
+
+    it('Should return array of tickets sorted with mode: cheap', () => {
+        // TODO
+    })
+
+    it('Should return array of tickets sorted with mode: fast', () => {
+        // TODO
+    })
+})
+
+
+describe('Filter tickets by count, mode and stops arguments', () => {
+    // TODO: write test for all cases
 })
