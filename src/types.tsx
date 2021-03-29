@@ -1,43 +1,43 @@
 import React from 'react'
 
 export interface ICheckbox {
-    value: boolean
-    title: string
-    disabled?: boolean
+    readonly value: boolean
+    readonly title: string
+    readonly disabled?: boolean
     onChange: (value: boolean) => void
 }
 
 export interface IButton {
-    value: string
-    mode?: string
-    active?: boolean
-    disabled?: boolean
-    position?: string
+    readonly value: string
+    readonly mode?: string
+    readonly active?: boolean
+    readonly disabled?: boolean
+    readonly position?: string
     onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
 export interface ITicket {
-    price: number
-    carrier: string
-    segments: ITicketSegment[]
+    readonly price: number
+    readonly carrier: string
+    segments: ReadonlyArray<ITicketSegment>
 }
 
 export interface ITicketSegment {
-    origin: string
-    destination: string
-    date: string
-    stops: string[]
-    duration: number
+    readonly origin: string
+    readonly destination: string
+    readonly date: string
+    readonly stops: string[]
+    readonly duration: number
 }
 
 export interface IFilterBar {
-    mode: string | null
+    readonly mode: string | null
     onChange: (mode: string | null) => void
 }
 
 export interface IFilterSidebar {
-    stops: number[]
-    activeStops: number[]
+    stops: ReadonlyArray<number>
+    activeStops: ReadonlyArray<number>
     onChange: (value: number) => void
     onAllStopsClick: (values: number[]) => void
 }

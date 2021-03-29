@@ -95,7 +95,7 @@ export function filterTickets(tickets: ITicket[], count: number = 5, mode: strin
     } else {
         currentStops = stops
     }
-    return sortTickets(currentTickets, mode, stops).filter(t => t.segments.some(s => currentStops.includes(s.stops.length)))
+    return sortTickets(currentTickets, mode).filter(t => t.segments.some(s => currentStops.includes(s.stops.length)))
 }
 
 
